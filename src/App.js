@@ -12,44 +12,47 @@ const App = () => {
     bad: 0,
   });
 
-  const {good, neutral, bad} = stats;
+  const { good, neutral, bad } = stats;
 
-  const handleIncrementStat = ({target: {textContent} }) => 
-  setStats((prState) => ({
-    ...prState,
-    [textContent]: stats[textContent] + 1,
-  }));
+  const handleIncrementStat = ({ target: { textContent } }) =>
+    setStats((prState) => ({
+      ...prState,
+      [textContent]: stats[textContent] + 1,
+    }));
 
-const countTotalFeedback = () => {
-const result = good + neutral + bad;
-return result;
-};
+  const countTotalFeedback = () => {
+    const result = good + neutral + bad;
+    return result;
+  };
 
-const countPositiveFeedbackPercentage = () =>
-Math.round(((good * 100) / countTotalFeedback()) * 10) / 10;
+  const countPositiveFeedbackPercentage = () => {
+    return Number(
+      Math.round((this.state.good * 100) / this.countTotalFeedback())
+    );
+  };
 
   return (
     <Container>
       <Section title="Please leave feedback">
         <FeedbackOptions
-        options={Object.keys(stats)}
-        onLeaveFeedback={handleIncrementStat}
+          options={Object.keys(stats)}
+          onLeaveFeedback={handleIncrementStat}
         />
       </Section>
 
       <Section title="Statistics">
-        {countTotalFeedback() ? (
-          <Statistics 
-      good={good} 
-      neutral={neutral} 
-      bad={bad} 
-      total={countTotalFeedback} 
-      positivePercentage={countPositiveFeedbackPercentage}
-      />
+        {good || bad || neutral ? (
+          <Statistics
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={countTotalFeedback}
+            positivePercentage={countPositiveFeedbackPercentage}
+          />
         ) : (
-<Notification message="No feedback given"></Notification>
+          <Notification message="No feedback given"></Notification>
         )}
-     </Section>
+      </Section>
     </Container>
   );
 };
