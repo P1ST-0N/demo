@@ -25,11 +25,8 @@ const App = () => {
     return result;
   };
 
-  const countPositiveFeedbackPercentage = () => {
-    return Number(
-      Math.round((this.state.good * 100) / this.countTotalFeedback())
-    );
-  };
+  const countPositiveFeedbackPercentage = () => 
+  Math.round(((good * 100) / countTotalFeedback()) * 10) / 10;
 
   return (
     <Container>
@@ -41,7 +38,7 @@ const App = () => {
       </Section>
 
       <Section title="Statistics">
-        {countTotalFeedback ? (
+        {countTotalFeedback() ? (
           <Statistics
             good={good}
             neutral={neutral}
