@@ -28,7 +28,6 @@ const App = () => {
   const countPositiveFeedbackPercentage = () => 
   Math.round(((good * 100) / countTotalFeedback()) * 10) / 10;
 
-  console.log(countTotalFeedback());
   return (
     <Container>
       <Section title="Please leave feedback">
